@@ -20,7 +20,7 @@ class DeckSummary extends Component {
          {name}
         </Text>
   	    <Text style={{fontSize : 14 * size, color: purple}}>
-          {length} {length === 1 ? 'card' : 'cards'}
+          {length} {length <= 1 ? 'card' : 'cards'}
         </Text>
   	  </View>
   	)

@@ -4,7 +4,8 @@ const DECKS_STORAGE_KEY = "UdaciCards:decks"
 
 function setDummyData() {
   console.log('Create Dummy Data')
-  return {React: {
+  return {
+    React: {
     title: 'React',
     questions: [
       {

@@ -31,12 +31,12 @@ class DeckList extends Component {
 
   	return (
   	  <View style={{backgroundColor:dimPurp, flex : 1}}>
-  	    {Object.keys(decks.decks).map((deckName) => {
+  	    {Object.keys(decks).map((deckName) => {
   	      return (
   	      <TouchableOpacity 
   	       key={deckName}
   	       onPress={() => this.props.navigation.navigate('DeckView', {deckName})}>
-  	        <DeckListItem name={deckName} length={decks.decks[deckName].questions.length}/>
+  	        <DeckListItem name={deckName} length={decks[deckName].questions.length}/>
   	      </TouchableOpacity>
   	      )
   	    }
@@ -46,7 +46,9 @@ class DeckList extends Component {
   }
 }
 
-function mapStateToProps(decks) {
+function mapStateToProps(state) {
+  console.log(state)
+  const { decks } = state
   return { decks }
 }
 
