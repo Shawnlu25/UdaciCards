@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
     fontSize : 38,
     color: darkPurp,
     fontWeight : 'bold',
+    textAlign: 'center'
   },
   contentStrSmall : {
     fontSize : 24,

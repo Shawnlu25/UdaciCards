@@ -17,14 +17,18 @@ class DeckView extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, deckName } = this.props
+    const { dispatch } = this.props
+    const { deckName } = this.props.navigation.state.params
 
     getDeck(deckName)
-      .then(deck => dispatch(receiveDecks({[deckName] : deck})))
+      .then(deck => this.props.deckDataRefresh({[deckName] : deck}))
   }
 
   render() {
-  	const { deckName, deckData } = this.props
+    const { deckName } = this.props.navigation.state.params
+  	const { decks } = this.props
+    deckData = decks[deckName]
+    deckLength = decks[deckName].questions.length
   	return (
   	  <View 
   	    style={{
@@ -35,7 +39,7 @@ class DeckView extends Component {
   	    <View style={styles.summary}>
   	      <DeckSummary 
   	        name={deckName} 
-  	        length={deckData.questions.length} 
+  	        length={deckLength} 
   	        size={2}/>
   	    </View>
   	    <TouchableOpacity 
@@ -44,7 +48,10 @@ class DeckView extends Component {
           onPress={() => this.props.navigation.navigate('QuizView', {deckData})}>
   	      <Text style={styles.btnText}> Start Quiz </Text>
   	    </TouchableOpacity>
-  	    <TouchableOpacity style={styles.btn} underlayColor={purple}>
+  	    <TouchableOpacity 
+          style={styles.btn} 
+          underlayColor={purple}
+          onPress={() => this.props.navigation.navigate('NewQuestion', {deckName})}>
   	      <Text style={styles.btnText}> Add New Question </Text>
   	    </TouchableOpacity>
   	  </View>
@@ -52,17 +59,21 @@ class DeckView extends Component {
   }
 }
 
-function mapStateToProps(state, { navigation }) {
-  const { deckName } = navigation.state.params
+function mapStateToProps({ decks }) {
   return { 
-  	deckName,
-  	deckData : state.decks[deckName]
+    decks
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    deckDataRefresh: deckData => {dispatch(receiveDecks(deckData))}
   }
 }
 
 const styles = StyleSheet.create({
   summary : {
-  	flex : 3,
+  	flex : 5,
     padding: 10
   },
   btn : {
@@ -84,4 +95,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default connect(mapStateToProps)(DeckView) 
+export default connect(mapStateToProps, mapDispatchToProps)(DeckView) 

@@ -10,6 +10,7 @@ import DeckList from './components/DeckList'
 import DeckView from './components/DeckView'
 import QuizView from './components/QuizView'
 import NewDeck from './components/NewDeck'
+import NewQuestion from './components/NewQuestion'
 import reducer from './reducers'
 
 function UdaciCardsStatusBar ({backgroundColor, ...props}) {
@@ -33,7 +34,7 @@ const Tabs = TabNavigator(
       navigationOptions : {
         tabBarLabel : 'New Deck'
       }
-    }
+    },
   },
   {
     navigationOptions: {
@@ -70,6 +71,15 @@ const MainNavigator = StackNavigator({
   },
   QuizView : {
     screen: QuizView,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  },
+  NewQuestion : {
+    screen: NewQuestion,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {

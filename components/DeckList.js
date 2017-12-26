@@ -28,7 +28,6 @@ class DeckList extends Component {
 
   	if (ready === false)
   		return <AppLoading/>
-
   	return (
   	  <View style={{backgroundColor:dimPurp, flex : 1}}>
   	    {Object.keys(decks).map((deckName) => {
@@ -47,7 +46,6 @@ class DeckList extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   const { decks } = state
   return { decks }
 }

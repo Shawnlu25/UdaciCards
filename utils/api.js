@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
 
-const DECKS_STORAGE_KEY = "UdaciCards:decks"
+const DECKS_STORAGE_KEY = "@UdaciCards:decks"
 
 function setDummyData() {
   console.log('Create Dummy Data')
@@ -32,20 +32,22 @@ function setDummyData() {
 
 export function getDecks() {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-    .then((result) => result === null ? setDummyData() : JSON.parse(result))
+    .then((result) => JSON.parse(result))
 }
 
 export function getDeck(name) {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-    .then((result) => result === null ? setDummyData() : JSON.parse(result))
+    .then((result) => JSON.parse(result))
     .then((result) => result[name])
 }
 
 export function saveDeckTitle(title) {
-  return null
+  return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({[title] : {title : title, questions : []}}))
 }
 
 export function addCardToDeck(title, card) {
-  return null
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then((result) => JSON.parse(result))
+    .then((result) => {result[title].questions.push(card); return result;})
+    .then((result) => AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(result)))
 }
-
