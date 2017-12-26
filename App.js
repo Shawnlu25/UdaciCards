@@ -8,6 +8,7 @@ import { createStore } from 'redux'
 import { white, purple } from './utils/colors'
 import DeckList from './components/DeckList'
 import DeckView from './components/DeckView'
+import QuizView from './components/QuizView'
 import NewDeck from './components/NewDeck'
 import reducer from './reducers'
 
@@ -60,6 +61,15 @@ const MainNavigator = StackNavigator({
   },
   DeckView : {
     screen: DeckView,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  },
+  QuizView : {
+    screen: QuizView,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {

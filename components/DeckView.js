@@ -38,7 +38,10 @@ class DeckView extends Component {
   	        length={deckData.questions.length} 
   	        size={2}/>
   	    </View>
-  	    <TouchableOpacity style={styles.btn} underlayColor={purple}>
+  	    <TouchableOpacity 
+          style={styles.btn} 
+          underlayColor={purple}
+          onPress={() => this.props.navigation.navigate('QuizView', {deckData})}>
   	      <Text style={styles.btnText}> Start Quiz </Text>
   	    </TouchableOpacity>
   	    <TouchableOpacity style={styles.btn} underlayColor={purple}>
