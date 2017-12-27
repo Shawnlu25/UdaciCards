@@ -11,6 +11,7 @@ function decks (state={}, action) {
   	case ADD_CARD : 
       var deck = state[deckName]
       deck.questions.push(card)
+      console.log(card)
       return {...state, [deckName] : deck}
   	default : 
   	  return state

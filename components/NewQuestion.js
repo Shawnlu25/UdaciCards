@@ -31,9 +31,9 @@ class NewQuestion extends Component {
     addCardToDeck(this.props.deckName, {question : this.state.questionInput, answer : this.state.answerInput})
     .then(results => {
       this.props.dispatch(addCard(this.props.deckName, {question : this.state.questionInput, answer : this.state.answerInput}))
+      this.setState({questionInput:'', answerInput :''})
       this.props.navigation.goBack()
     })
-    this.setState({questionInput:'', answerInput :''})
   }
 
   render() {

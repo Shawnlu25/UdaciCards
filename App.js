@@ -12,6 +12,7 @@ import QuizView from './components/QuizView'
 import NewDeck from './components/NewDeck'
 import NewQuestion from './components/NewQuestion'
 import reducer from './reducers'
+import {setLocalNotification} from './utils/notification'
 
 function UdaciCardsStatusBar ({backgroundColor, ...props}) {
   return (
@@ -90,6 +91,11 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     const store = createStore(reducer)
     return (

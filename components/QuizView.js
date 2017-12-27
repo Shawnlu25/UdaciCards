@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native
 import { connect } from 'react-redux'
 
 import { white, darkPurp, purple, dimPurp } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification} from '../utils/notification'
 
 class QuizView extends Component {
   
@@ -49,6 +50,8 @@ class QuizView extends Component {
     }
 
     if ( this.state.cursor == questions.length) {
+      clearLocalNotification()
+      setLocalNotification()
       return (
         <View style={{
           backgroundColor:white, 
