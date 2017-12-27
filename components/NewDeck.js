@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 
 import { saveDeckTitle, getDecks } from '../utils/api'
 import { addDeck, receiveDecks } from '../actions'
@@ -16,9 +17,10 @@ class NewDeck extends Component {
   }  
 
   submitNewDeck = () => {
-    saveDeckTitle(this.state.deckNameInput)
-    getDecks()
-      .then(decks => this.props.dispatch(receiveDecks(decks)))
+    const deckName = this.state.deckNameInput
+    saveDeckTitle(deckName)
+    this.props.dispatch(addDeck(deckName))
+    this.props.navigation.navigate('DeckView', {deckName})
     this.setState({deckNameInput : ''})
   }
 
@@ -38,7 +40,7 @@ class NewDeck extends Component {
   	    <TouchableOpacity 
           style={styles.btn} 
           underlayColor={purple}
-          onPress={() => {this.submitNewDeck();this.props.navigation.goBack()}}>
+          onPress={() => this.submitNewDeck()}>
           <Text style={styles.btnText}>Submit</Text>
         </TouchableOpacity>
   	  </KeyboardAvoidingView>
